@@ -1,4 +1,6 @@
 class TasksController < ApplicationController
+  protect_from_forgery with: :exception
+  before_action :authenticate_user!
 
   def index
     @project = Project.find(params[:project_id])
@@ -33,6 +35,9 @@ class TasksController < ApplicationController
 
   def create
     @project = Project.find(params[:project_id])
+    if current_user.!admin
+      task_params.merge(:user_id => current_user.id)
+    end
     @task = @project.tasks.create(task_params)
     if @task.save
       redirect_to project_path(@project)

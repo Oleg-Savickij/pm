@@ -1,19 +1,4 @@
-<p>
-  <strong>Name:</strong>
-  <%= @project.name %>
-</p>
-<p>
-  <strong>Summary:</strong>
-  <%= @project.summary %>
-</p>
-<p>
-  <strong>Start date:</strong>
-  <%= @project.start_date %>
-</p>
-<p>
-  <strong>End date:</strong>
-  <%= @project.end_date %>
-</p>
+<%= render 'project' %>
 
 <h2>Tasks</h2>
 <table class="table">
@@ -30,7 +15,7 @@
         <td><%= task.title %></td>
         <td><%= task.description %></td>
         <td><%= task.status %></td>
-        <td><%= task.users %></td>
+        <td><%= task.user.email %></td>
         <td class="btn-group">
           <%= link_to 'Show', project_task_path(task), { :class => "btn btn-default" } %>
           <%= link_to 'Edit', edit_project_task_path(task), { :class => "btn btn-default" } %>

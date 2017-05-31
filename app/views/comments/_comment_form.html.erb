@@ -1,0 +1,9 @@
+<%= form_for ([@project, @task, comment]) do |f| %>
+    <p>
+      <%= f.label :"Comment" %><br>
+      <%= f.text_field :body %>
+    </p>
+    <p>
+      <%= f.submit :class => "btn btn-default" %>
+    </p>
+<% end %>

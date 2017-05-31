@@ -12,8 +12,10 @@
       <%= f.select :status, options_for_select(["new", "in progress", "done" ]) %>
     </p>
     <p>
+      <% if current_user.admin %>
       <%= f.label :"Assign" %><br>
       <%= f.select :user_id, User.all.collect {|p| [p.email, p.id]} %>
+      <% end %>
     </p>
     <p>
       <%= f.submit :class => "btn btn-default" %>

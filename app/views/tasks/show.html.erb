@@ -1,13 +1,28 @@
-<p>
-  <strong>Title:</strong>
-  <%= @task.title %>
-</p>
-<p>
-  <strong>Description:</strong>
-  <%= @task.description %>
-</p>
-<p>
-  <strong>Status:</strong>
-  <%= @task.status %>
-</p>
+<%= render 'task' %>
+
+<h2>Comments</h2>
+<table class="table">
+  <tr>
+    <th>Author</th>
+    <th>Comment</th>
+    <th></th>
+  </tr>
+
+  <% @task.comments.each do |comment| %>
+      <tr>
+        <td><%= comment.user.email %></td>
+        <td><%= comment.body %></td>
+        <td class="btn-group">
+          <%= link_to 'Edit', edit_project_task_comment_path(@project, @task, comment), { :class => "btn btn-default" } %>
+          <%= link_to 'Destroy', project_task_comment_path(@project, @task, comment),
+                      method: :delete,
+                      data: { confirm: 'Are you sure?' },
+                      :class => "btn btn-default" %>
+
+      </tr>
+  <% end %>
+</table>
+
+<%= render partial: 'comments/comment_form', locals: {comment: @task.comments.build} %>
+
 <td><%= link_to 'Back', project_path(@project), { :class => "btn btn-default" } %></td>
