@@ -2,6 +2,10 @@ class TasksController < ApplicationController
   protect_from_forgery with: :exception
   load_and_authorize_resource
 
+  def show
+    @project = Project.find(params[:project_id])
+  end
+
   def update
     @project = Project.find(params[:project_id])
     @task = @project.tasks.find(params[:id])

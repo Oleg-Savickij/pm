@@ -2,6 +2,10 @@ class CommentsController < ApplicationController
   protect_from_forgery with: :exception
   load_and_authorize_resource
 
+  def edit
+    @project = Project.find(@task)
+  end
+
   def update
     @task = Task.find(params[:task_id])
     @comment = @task.comments.find(params[:id])
