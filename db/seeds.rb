@@ -3,7 +3,7 @@ Task.destroy_all
 Project.destroy_all
 User.destroy_all
 
-20.times do |index|
+10.times do |index|
   @user = User.create!(email: Faker::Internet.email,
                password: Faker::Internet.password,
                admin: [true, false].sample,
@@ -13,20 +13,20 @@ User.destroy_all
 end
 
 @statuses = ['in progress', 'done', 'new']
-300.times do |index|
+15.times do |index|
   @project = Project.create!(name: Faker::Name.title,
                   summary: Faker::Lorem.paragraph,
                   start_date: Faker::Time.between(4.months.ago, 1.week.ago),
                   end_date: Faker::Time.between(4.months.ago, 1.week.ago))
 
-  10.times do |index|
+  15.times do |index|
     @user = User.order("RANDOM()").first
     @task = @project.tasks.create!(title: Faker::Name.title,
                            description: Faker::Lorem.paragraph,
                            status: @statuses.sample,
                            user_id: @user.id)
 
-    15.times do |index|
+    5.times do |index|
       @user = User.order("RANDOM()").first
       @task.comments.create!(body: Faker::Lorem.sentence,
                              user_id: @user.id)
