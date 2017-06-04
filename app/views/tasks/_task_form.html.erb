@@ -1,4 +1,17 @@
 <%= form_for ([@project, @task]) do |f| %>
+    <% if @task.errors.any? %>
+        <div id="error_explanation" class="alert alert-danger">
+          <h2>
+            <%= pluralize(@task.errors.count, "error") %> prohibited
+            this task from being saved:
+          </h2>
+          <ul>
+            <% @task.errors.full_messages.each do |msg| %>
+                <li><%= msg %></li>
+            <% end %>
+          </ul>
+        </div>
+    <% end %>
     <p>
       <%= f.label :"Title" %><br>
       <%= f.text_field :title %>
@@ -13,11 +26,14 @@
     </p>
     <p>
       <% if current_user.admin %>
-      <%= f.label :"Assign" %><br>
-      <%= f.select :user_id, User.all.collect {|p| [p.email, p.id]} %>
+          <%= f.label :"Assign" %><br>
+          <%= f.select :user_id, User.all.collect {|p| [p.email, p.id]} %>
+      <% else %>
+          <%= f.hidden_field :user_id, value: current_user.id %>
       <% end %>
     </p>
     <p>
       <%= f.submit :class => "btn btn-default" %>
     </p>
+
 <% end %>

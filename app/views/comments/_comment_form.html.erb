@@ -2,6 +2,7 @@
     <p>
       <%= f.label :"Comment" %><br>
       <%= f.text_field :body %>
+      <%= f.hidden_field :user_id, value: current_user.id %>
     </p>
     <p>
       <%= f.submit :class => "btn btn-default" %>

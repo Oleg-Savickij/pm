@@ -1,0 +1,16 @@
+<div class="navbar navbar-default">
+  <div class="navbar-header">
+    <%= link_to 'Projects management', root_path, { :class => "navbar-brand" }%>
+  </div>
+  <% if user_signed_in? %>
+      <div class="navbar-right" style="padding-right: 30px">
+        <span>Здравствуйте, <%= current_user.email %></span>
+        <%= link_to 'Выйти', destroy_user_session_path, { :class => "btn btn-default navbar-btn", :method => :delete }%>
+      </div>
+  <% else %>
+      <div class="btn-group navbar-right" role="group" aria-label="..." style="padding-right: 30px">
+        <%= link_to 'Войти', new_user_session_path, { :class => "btn btn-default" }%>
+        <%= link_to 'Зарегистрироваться', new_user_registration_path, { :class => "btn btn-default navbar-btn" } %>
+      </div>
+  <% end %>
+</div>

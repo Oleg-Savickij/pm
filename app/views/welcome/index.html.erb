@@ -1,16 +1,4 @@
-<div class="page-header">
-  <% if user_signed_in? %>
-      <div class="pull-right" style="padding-right: 30px">
-      <span>Здравствуйте, <%= current_user.email %></span>
-      <%= link_to 'Выйти', destroy_user_session_path, { :class => "btn btn-default", :method => :delete }%>
-      </div>
-  <% else %>
-      <div class="btn-group pull-right" role="group" aria-label="..." style="padding-right: 30px">
-        <%= link_to 'Войти', new_user_session_path, { :class => "btn btn-default" }%>
-        <%= link_to 'Зарегистрироваться', new_user_registration_path, { :class => "btn btn-default" } %>
-      </div>
-  <% end %>
-</div>
+<%= render 'header' %>
 <h1>Welcome#index</h1>
 <p>Find me in app/views/welcome/index.html.erb</p>
 <%= link_to 'Проекты', projects_path, { :class => "btn btn-default" } %>

@@ -5,4 +5,6 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :trackable, :validatable
   has_one :task
   has_many      :comments
+  validates :first_name, presence: true
+  validates :last_name, presence: true
 end

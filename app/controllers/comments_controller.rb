@@ -1,29 +1,6 @@
 class CommentsController < ApplicationController
   protect_from_forgery with: :exception
-  before_action :authenticate_user!
-
-  def index
-    @task = Task.find(params[:task_id])
-    @comments = @task.comments.all
-  end
-
-  def show
-    @project = Project.find(params[:project_id])
-    @task = Task.find(params[:task_id])
-    @comment = @task.comments.find(params[:id])
-  end
-
-  def new
-    @project = Project.find(params[:project_id])
-    @task = Task.find(params[:task_id])
-    @comment = @task.comments.build
-  end
-
-  def edit
-    @project = Project.find(params[:project_id])
-    @task = Task.find(params[:task_id])
-    comment = @task.comments.find(params[:id])
-  end
+  load_and_authorize_resource
 
   def update
     @task = Task.find(params[:task_id])

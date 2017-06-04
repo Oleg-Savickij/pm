@@ -1,26 +1,6 @@
 class TasksController < ApplicationController
   protect_from_forgery with: :exception
-  before_action :authenticate_user!
-
-  def index
-    @project = Project.find(params[:project_id])
-    @tasks = @project.tasks.all
-  end
-
-  def show
-    @project = Project.find(params[:project_id])
-    @task = @project.tasks.find(params[:id])
-  end
-
-  def new
-    @project = Project.find(params[:project_id])
-    @task = @project.tasks.build
-  end
-
-  def edit
-    @project = Project.find(params[:project_id])
-    @task = @project.tasks.find(params[:id])
-  end
+  load_and_authorize_resource
 
   def update
     @project = Project.find(params[:project_id])
@@ -35,9 +15,6 @@ class TasksController < ApplicationController
 
   def create
     @project = Project.find(params[:project_id])
-    if current_user.!admin
-      task_params.merge(:user_id => current_user.id)
-    end
     @task = @project.tasks.create(task_params)
     if @task.save
       redirect_to project_path(@project)
@@ -55,7 +32,7 @@ class TasksController < ApplicationController
 
   private
   def task_params
-    params.require(:task).permit(:title, :description, :status)
+    params.require(:task).permit(:title, :description, :status, :user_id)
   end
 
 end

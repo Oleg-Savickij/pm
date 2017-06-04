@@ -1,22 +1,8 @@
 class ProjectsController < ApplicationController
   protect_from_forgery with: :exception
-  before_action :authenticate_user!
-
-  def index
-    @projects = Project.all
-  end
-
-  def new
-    @project = Project.new
-  end
-
-  def edit
-    @project = Project.find(params[:id])
-  end
+  load_and_authorize_resource
 
   def create
-    @project = Project.new(project_params)
-
     if @project.save
       redirect_to @project
     else
@@ -25,8 +11,6 @@ class ProjectsController < ApplicationController
   end
 
   def update
-    @project = Project.find(params[:id])
-
     if @project.update(project_params)
       redirect_to @project
     else
@@ -39,10 +23,6 @@ class ProjectsController < ApplicationController
     @project.destroy
 
     redirect_to projects_path
-  end
-
-  def show
-    @project = Project.find(params[:id])
   end
 
   private

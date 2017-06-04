@@ -20,11 +20,11 @@
       <%= f.text_field :summary, { :class => "form-control", :type => "text"} %>
     </p>
 
-    <p class="input-group">
+    <p class="form-group">
       <%= f.label :"Start date" %><br>
-      <%= f.date_select :start_date, { :class => "btn btn-default"}, :type => "text" %><br>
+      <%= f.text_field :start_date, { :class => "btn btn-default", :type => "date", } %><br>
       <%= f.label :"End date" %><br>
-      <%= f.date_select :end_date, { :class => "btn btn-default", :type => "date"}%>
+      <%= f.text_field :end_date, { :class => "btn btn-default", :type => "date"}%>
     </p>
 
     <p>
