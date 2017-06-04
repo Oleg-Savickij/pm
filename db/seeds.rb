@@ -9,7 +9,7 @@ User.destroy_all
                admin: [true, false].sample,
                first_name: Faker::Name.first_name,
                last_name: Faker::Name.last_name)
-  p "Created #{@user.email} #{@user.password}, #{@user.admin} projects"
+  p "Created user: #{@user.email} with password: #{@user.password}, isAdmin: #{@user.admin}"
 end
 
 @statuses = ['in progress', 'done', 'new']
@@ -36,4 +36,4 @@ end
 
 p "Created #{Project.count} projects"
 p "Created #{Task.count} tasks"
-p "Created #{Comment.count} tasks"
+p "Created #{Comment.count} comments"
